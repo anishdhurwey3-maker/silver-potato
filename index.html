@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Modern responsive landing page template" />
+  <title>Your Brand — Landing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+ßuu      --bg: #0b1020;
+      --card: #11162a;
+      --text: #e5e7eb;
+      --muted: #a5b4fc;
+      --accent: #7c3aed; /* violet-600 */
+      --accent-2: #22d3ee; /* cyan-400 */
+      --ring: rgba(124, 58, 237, .35);
+      --border: #1f2937;
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --err: #ef4444;
+    }
+    [data-theme="light"]{
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #4f46e5;
+      --accent: #7c3aed;
+      --accent-2: #0891b2;
+      --ring: rgba(124, 58, 237, .25);
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(124,58,237,.25), transparent 60%),
+                  radial-gradient(1000px 700px at -10% 10%, rgba(34,211,238,.18), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0)); color: var(--text); padding:.8rem 1.1rem; border-radius: 1rem; font-weight:600; box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 6px 30px rgba(124,58,237,.15);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .2s ease; }
+    .btn:hover { transform: translateY(-1px); border-color: var(--muted); box-shadow: 0 6px 40px rgba(124,58,237,.25); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: none; color: white; box-shadow: 0 8px 40px rgba(124,58,237,.35); }
+    .btn.ghost { background: transparent; border-color: var(--border); }
+
+    /* NAV */
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in oklab, var(--bg), transparent 25%); border-bottom: 1px solid var(--border); }
+    .nav .row { display: flex; align-items: center; justify-content: space-between; padding: .75rem 0; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px; }
+    .brand .logo { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; color:white; font-weight:800; }
+    .navlinks { display:flex; gap: 1rem; align-items:center; }
+    .navlinks a { opacity:.9; padding:.5rem .7rem; border-radius:.6rem; }
+    .navlinks a:hover { background: rgba(124,58,237,.1); opacity:1; }
+    .mobile-toggle { display:none; }
+
+    /* HERO */
+    .hero { padding: 5rem 0 3rem; text-align: center; }
+    .eyebrow { display:inline-flex; align-items:center; gap:.5rem; font-size:.9rem; color: var(--muted); background: color-mix(in oklab, var(--accent) 15%, transparent); padding: .35rem .6rem; border:1px solid var(--border); border-radius: 999px; }
+    h1 { font-weight: 800; font-size: clamp(2rem, 4vw + .5rem, 3.5rem); line-height: 1.08; margin: 1rem 0 .5rem; }
+    .sub { font-size: clamp(1rem, 1.2vw + .4rem, 1.25rem); opacity: .9; max-width: 60ch; margin: 0 auto 1.5rem; }
+    .cta { display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top:1.2rem; }
+
+    /* SHOWCASE */
+    .mock { margin: 2.2rem auto 0; width: min(980px, 96%); border:1px solid var(--border); background: var(--card); border-radius: 1.2rem; overflow: hidden; box-shadow: 0 20px 80px rgba(0,0,0,.35); }
+    .mock .chrome { display:flex; align-items:center; gap:.4rem; padding:.6rem .8rem; border-bottom:1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.04), transparent); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #ef4444; }
+    .dot:nth-child(2){ background:#f59e0b; }
+    .dot:nth-child(3){ background:#10b981; }
+    .mock img { width: 100%; display:block; }
+
+    /* FEATURES */
+    .section { padding: 4.5rem 0; }
+    .section h2 { font-size: clamp(1.5rem, 1.6vw + .8rem, 2.2rem); margin: 0 0 1rem; }
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: 1rem; padding: 1.1rem; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+    .feature { grid-column: span 4; }
+    .feature h3 { margin:.5rem 0 .3rem; }
+    .muted { opacity:.85; }
+
+    /* PRICING */
+    .price-col { grid-column: span 4; display:flex; flex-direction:column; gap: .7rem; }
+    .price { font-size: 2rem; font-weight: 800; }
+    .pill { display:inline-block; font-size:.8rem; padding:.25rem .5rem; border-radius: 999px; border: 1px solid var(--border); opacity:.9; }
+    ul.plan { list-style: none; padding: 0; margin: .3rem 0 0; }
+    .plan li { display:flex; align-items:flex-start; gap:.5rem; margin:.45rem 0; }
+
+    /* TESTIMONIALS */
+    .testi { grid-column: span 6; display:flex; gap: .9rem; }
+    .avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; font-weight:700; color:white; }
+
+    /* FAQ */
+    .faq { grid-column: span 6; }
+    details { background: var(--card); border:1px solid var(--border); border-radius: .9rem; padding: .9rem 1rem; }
+    details + details { margin-top: .6rem; }
+    summary { cursor:pointer; font-weight:600; }
+
+    /* CONTACT */
+    form { display:grid; gap:.8rem; }
+    input, textarea { width: 100%; padding:.9rem; border-radius:.8rem; border:1px solid var(--border); background: color-mix(in oklab, var(--bg), white 2%); color: var(--text); }
+    input:focus, textarea:focus { outline: none; border-color: var(--muted); box-shadow: 0 0 0 6px var(--ring); }
+    .notice { font-size:.9rem; opacity:.85; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; margin-top: 2rem; font-size:.95rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .feature, .price-col, .testi, .faq { grid-column: span 12; }
+      .navlinks { display:none; }
+      .mobile-toggle { display:inline-flex; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container row">
+      <a href="#" class="brand">
+        <span class="logo">A</span>
+        <span>Your Brand</span>
+      </a>
+      <div class="navlinks" id="navlinks">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <button class="btn ghost" id="themeBtn" aria-label="Toggle theme">Toggle theme</button>
+      </div>
+      <button class="btn mobile-toggle" id="menuBtn" aria-label="Menu">Menu</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero container">
+    <span class="eyebrow">New • Powerful • Simple</span>
+    <h1>Build a beautiful website in minutes.</h1>
+    <p class="sub">A polished, responsive starter you can customize quickly. Swap copy, drop in images, and ship your next idea without the boilerplate grind.</p>
+    <div class="cta">
+      <a class="btn primary" href="#pricing">Get Started</a>
+      <a class="btn" href="#features">See Features</a>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="chrome">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <!-- Replace this image with a screenshot of your product/site -->
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Product screenshot placeholder" />
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section id="features" class="section container">
+    <h2>Everything you need to launch</h2>
+    <div class="grid">
+      <article class="card feature">
+        <div class="pill">Design</div>
+        <h3>Modern UI</h3>
+        <p class="muted">Clean layout, soft shadows, and gradients that feel premium out of the box.</p>
+      </article>
+      <article class="card feature">
+        <div class="pill">Performance</div>
+        <h3>Fast by default</h3>
+        <p class="muted">Lightweight, responsive, and accessible. No heavy frameworks required.</p>
+      </article>
+      <article class="card feature">
+        <div class="pill">Developer</div>
+        <h3>Easy to extend</h3>
+        <p class="muted">Tidy CSS variables and utility classes make customization a breeze.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS + FAQ -->
+  <section class="section container">
+    <div class="grid">
+      <div class="testi card">
+        <div class="avatar">JD</div>
+        <div>
+          <h3>“We shipped in a weekend.”</h3>
+          <p class="muted">“This template gave us a professional presence fast. The code is clean and easy to modify.”</p>
+          <p class="pill">— Jordan, Indie Dev</p>
+        </div>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Is this template free to use?</summary>
+          <p class="muted">Yes. Use it for personal and commercial projects. A link back is appreciated but not required.</p>
+        </details>
+        <details>
+          <summary>How do I customize the colors?</summary>
+          <p class="muted">Edit the CSS variables in <code>:root</code> for dark mode and <code>[data-theme="light"]</code> for light mode.</p>
+        </details>
+        <details>
+          <summary>Can I add more sections?</summary>
+          <p class="muted">Absolutely. Duplicate a <code>.section</code> block and adjust the grid as needed.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section container">
+    <h2>Simple, transparent pricing</h2>
+    <div class="grid">
+      <div class="card price-col">
+        <div class="pill">Starter</div>
+        <div class="price">$0<span class="muted">/forever</span></div>
+        <ul class="plan">
+          <li>✅ Launch-ready layout</li>
+          <li>✅ Email support (community)</li>
+          <li>✅ MIT license</li>
+        </ul>
+        <a class="btn" href="#contact">Use Starter</a>
+      </div>
+      <div class="card price-col" style="border-color: var(--muted); box-shadow: 0 12px 50px rgba(124,58,237,.25);">
+        <div class="pill">Pro</div>
+        <div class="price">$29<span class="muted">/mo</span></div>
+        <ul class="plan">
+          <li>✅ Everything in Starter</li>
+          <li>✅ Priority support</li>
+          <li>✅ Extra components</li>
+        </ul>
+        <a class="btn primary" href="#contact">Go Pro</a>
+      </div>
+      <div class="card price-col">
+        <div class="pill">Team</div>
+        <div class="price">$99<span class="muted">/mo</span></div>
+        <ul class="plan">
+          <li>✅ Team license</li>
+          <li>✅ Figma kit</li>
+          <li>✅ Onboarding call</li>
+        </ul>
+        <a class="btn" href="#contact">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section container">
+    <h2>Contact us</h2>
+    <div class="grid">
+      <div class="card" style="grid-column: span 7;">
+        <form id="contactForm" novalidate>
+          <div class="grid" style="grid-template-columns: repeat(12, 1fr); gap:.8rem;">
+            <div style="grid-column: span 6;">
+              <label for="name" class="pill">Name</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Your name" required />
+            </div>
+            <div style="grid-column: span 6;">
+              <label for="email" class="pill">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+            <div style="grid-column: span 12;">
+              <label for="message" class="pill">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:.8rem; margin-top:.4rem;">
+            <button class="btn primary" type="submit">Send message</button>
+            <span class="notice" id="formNote">We usually reply within 24 hours.</span>
+          </div>
+        </form>
+      </div>
+      <div class="card" style="grid-column: span 5;">
+        <h3>Company</h3>
+        <p class="muted">123 Anywhere St, City, Country</p>
+        <p class="muted">support@yourbrand.com</p>
+        <p class="muted">+1 (555) 123-4567</p>
+        <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+          <a class="btn ghost" href="#">Twitter</a>
+          <a class="btn ghost" href="#">GitHub</a>
+          <a class="btn ghost" href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Your Brand. All rights reserved.</div>
+      <div style="display:flex; gap:.6rem; align-items:center;">
+        <a href="#" class="pill">Privacy</a>
+        <a href="#" class="pill">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const navlinks = document.getElementById('navlinks');
+    menuBtn?.addEventListener('click', () => {
+      const isOpen = navlinks.style.display === 'flex';
+      navlinks.style.display = isOpen ? 'none' : 'flex';
+      navlinks.style.flexDirection = 'column';
+      navlinks.style.gap = '.5rem';
+    });
+
+    // Theme Toggle
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+    themeBtn?.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? '' : 'light';
+      if (next) root.setAttribute('data-theme', next); else root.removeAttribute('data-theme');
+      localStorage.setItem('theme', next);
+    });
+
+    // Footer Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact Form (demo only)
+    const form = document.getElementById('contactForm');
+    const note = document.getElementById('formNote');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Simple validation
+      if (!data.name || !data.email || !data.message) {
+        note.textContent = 'Please fill out all fields.';
+        note.style.color = 'var(--warn)';
+        return;
+      }
+      note.textContent = 'Thanks! Your message has been queued.';
+      note.style.color = 'var(--ok)';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
+
+I built you a clean, responsive landing page starter (see the canvas). It’s a single-file site (HTML + CSS + a sprinkle of JS) with:
+
+Sticky nav + mobile menu
+
+Dark/light theme toggle
+
+Hero with screenshot mock
+
+Features, testimonial, FAQ
+
+Pricing cards
+
+Contact form (client-side demo)
+
+Polished styling using CSS variables for easy theming
+
+
+Want me to tailor it to your brand? Tell me:
+
+Your brand name/logo initials
+
+Color vibe (e.g., blue/teal, orange/pink)
+
+Sections to add/remove (blog, gallery, services, team, map, newsletter)
+
+Any copy you want included
+
+
+If you’d prefer React + Tailwind or a multi-page version, I can convert this immediately.
+
